@@ -34,7 +34,7 @@ A **secure, production-ready CRUD application** built for government use case (l
 
 *(Yahan apni screenshots daal dena)*
 
-![Dashboard](screenshots/Screenshot 2026-05-17 at 11.40.30 PM.png)
+![Dashboard][Screenshot 2026-05-17 at 11.40.30 PM.png](https://raw.githubusercontent.com/Karma-tic/mponline-user-crud/main/screenshots/Screenshot 2026-05-17 at 11.40.30 PM.png)
 ![Form Validation](screenshot-2.png)
 
 ## 🏗 Project Structure
