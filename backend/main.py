@@ -1,22 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from slowapi import Limiter
-from slowapi.middleware import SlowAPIMiddleware
-from slowapi.util import get_remote_address
 from app.core.database import engine, Base
 from app.api.user import router as user_router
-
-limiter = Limiter(key_func=get_remote_address)
 
 app = FastAPI(
     title="MPOnline - Secure User Management",
     description="Government Standard Secure CRUD API",
     version="1.0.0"
 )
-
-# Rate Limiting Middleware
-app.state.limiter = limiter
-app.add_middleware(SlowAPIMiddleware)
 
 # CORS Security
 app.add_middleware(
@@ -27,19 +18,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Include Router
 app.include_router(user_router)
 
 @app.on_event("startup")
 def create_tables():
     Base.metadata.create_all(bind=engine)
-    print("✅ Database tables are ready!")
+    print("✅ Database tables created successfully!")
 
 @app.get("/")
 def home():
     return {
-        "message": "✅ MPOnline Secure User CRUD API is running safely",
-        "docs": "/docs"
+        "message": "✅ MPOnline Secure User CRUD API is running",
+        "docs_url": "http://localhost:8000/docs"
     }
 
 if __name__ == "__main__":
