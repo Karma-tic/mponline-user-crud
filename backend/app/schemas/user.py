@@ -1,13 +1,14 @@
 from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional
+from datetime import datetime
 import re
 
 class UserBase(BaseModel):
-    first_name: str = Field(..., min_length=2, max_length=50, description="First Name")
-    last_name: str = Field(..., min_length=2, max_length=50, description="Last Name")
-    email: EmailStr = Field(..., description="Valid Email Address")
-    gender: str = Field(..., description="Male, Female or Other")
-    phone_number: str = Field(..., min_length=10, max_length=15, description="Phone Number")
+    first_name: str = Field(..., min_length=2, max_length=50)
+    last_name: str = Field(..., min_length=2, max_length=50)
+    email: EmailStr
+    gender: str
+    phone_number: str = Field(..., min_length=10, max_length=15)
 
     class Config:
         from_attributes = True
@@ -28,4 +29,6 @@ class UserCreate(UserBase):
 
 class UserResponse(UserBase):
     id: int
-    created_at: Optional[str] = None
+    is_active: bool
+    created_at: Optional[datetime] = None   # ← Yeh change kiya
+    updated_at: Optional[datetime] = None
