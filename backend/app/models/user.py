@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Enum as SQLEnum, DateTime
+from sqlalchemy import Column, Integer, String, Enum as SQLEnum, DateTime, Boolean
 from sqlalchemy.sql import func
 import enum
 from app.core.database import Base
@@ -18,6 +18,6 @@ class User(Base):
     gender = Column(SQLEnum(Gender), nullable=False)
     phone_number = Column(String(15), unique=True, nullable=False)
     
-    is_active = Column(Integer, default=True)
+    is_active = Column(Boolean, default=True)           # ← Yeh change kiya
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
